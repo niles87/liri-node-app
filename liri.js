@@ -52,10 +52,10 @@ function concertSearch() {
     .then(response => {
       response.data.forEach(element => {
         console.log("*****venue data*****");
-        console.log(element.venue.name);
-        console.log(element.venue.city + " , " + element.venue.country);
-        console.log(moment(element.datetime).format("MM/DD/YYYY"));
-        console.log("*****venue end*****");
+        console.log("Venue:", element.venue.name);
+        console.log("Location:", element.venue.city + " , " + element.venue.country);
+        console.log("Date of Show:", moment(element.datetime).format("MM/DD/YYYY"));
+        console.log("*****venue end******");
       });
     })
     .catch(err => {
@@ -75,15 +75,15 @@ function movieSearch() {
       .get(queryURL)
       .then(response => {
         console.log("+++++++movie data+++++++");
-        console.log(response.data.Title);
-        console.log(response.data.Year);
-        console.log(response.data.imdbRating);
-        console.log(response.data.Ratings[1].Source, response.data.Ratings[1].Value);
-        console.log(response.data.Country);
-        console.log(response.data.Language);
-        console.log(response.data.Plot);
-        console.log(response.data.Actors);
-        console.log("+++++++movie end+++++++");
+        console.log("Title:", response.data.Title);
+        console.log("Year Produced:", response.data.Year);
+        console.log("IMDB Rating:", response.data.imdbRating);
+        console.log("Rotten Tomatoes Rating:", response.data.Ratings[1].Value);
+        console.log("Produced in:", response.data.Country);
+        console.log("Language:", response.data.Language);
+        console.log("Movie Plot:\n", response.data.Plot);
+        console.log("Actors/Actresses:", response.data.Actors);
+        console.log("+++++++movie end++++++++");
       })
       .catch(err => {
         console.log(err.config);
@@ -93,14 +93,18 @@ function movieSearch() {
       .get("http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy")
       .then(response => {
         console.log("+++++++movie data+++++++");
-        console.log(response.data.Title);
-        console.log(response.data.Year);
-        console.log(response.data.imdbRating);
-        console.log(response.data.Ratings[1].Source, response.data.Ratings[1].Value);
-        console.log(response.data.Country);
-        console.log(response.data.Language);
-        console.log(response.data.Plot);
-        console.log(response.data.Actors);
+        console.log("Title:", response.data.Title);
+        console.log("Year Produced:", response.data.Year);
+        console.log("IMDB Rating:", response.data.imdbRating);
+        console.log(
+          "Rotten Tomatoes Rating:",
+          response.data.Ratings[1].Source,
+          response.data.Ratings[1].Value
+        );
+        console.log("Produced in:", response.data.Country);
+        console.log("Language:", response.data.Language);
+        console.log("Movie Plot:\n", response.data.Plot);
+        console.log("Actors/Actresses:", response.data.Actors);
         console.log("+++++++movie end+++++++");
       })
       .catch(err => {
@@ -118,10 +122,10 @@ function songSearch() {
       .then(response => {
         var search = response.tracks.items[0];
         console.log("=======spotify data=======");
-        console.log(search.album.artists[0].name);
-        console.log(search.name);
-        console.log(search.preview_url);
-        console.log(search.album.name);
+        console.log("Artist:", search.album.artists[0].name);
+        console.log("Song Title:", search.name);
+        console.log("Preview:", search.preview_url);
+        console.log("Album:", search.album.name);
         console.log("=======spotify end=======");
       })
       .catch(err => {
@@ -133,10 +137,10 @@ function songSearch() {
       .then(response => {
         var search = response.tracks.items[0];
         console.log("=======spotify data=======");
-        console.log(search.album.artists[0].name);
-        console.log(search.name);
-        console.log(search.preview_url);
-        console.log(search.album.name);
+        console.log("Artist:", search.album.artists[0].name);
+        console.log("Song Title:", search.name);
+        console.log("Preview:", search.preview_url);
+        console.log("Album:", search.album.name);
         console.log("=======spotify end=======");
       })
       .catch(err => {
@@ -159,26 +163,34 @@ function wildCard() {
         spotify.search({ type: "track", query: dataArr[1], limit: 1 }).then(response => {
           var search = response.tracks.items[0];
           console.log("=======spotify data=======");
-          console.log(search.album.artists[0].name);
-          console.log(search.name);
-          console.log(search.preview_url);
-          console.log(search.album.name);
+          console.log("Artist:", search.album.artists[0].name);
+          console.log("Song Title:", search.name);
+          console.log("Preview:", search.preview_url);
+          console.log("Album:", search.album.name);
           console.log("=======spotify end=======");
         });
         break;
       case "movie-this":
         axios
-          .get("http://www.omdbapi.com/?t=" + dataArr[1] + "&y=&plot=short&apikey=trilogy")
+          .get(
+            "http://www.omdbapi.com/?t=" +
+              dataArr[1].split(" ").join("+") +
+              "&y=&plot=short&apikey=trilogy"
+          )
           .then(response => {
             console.log("+++++++movie data+++++++");
-            console.log(response.data.Title);
-            console.log(response.data.Year);
-            console.log(response.data.imdbRating);
-            console.log(response.data.Ratings[1].Source, response.data.Ratings[1].Value);
-            console.log(response.data.Country);
-            console.log(response.data.Language);
-            console.log(response.data.Plot);
-            console.log(response.data.Actors);
+            console.log("Title:", response.data.Title);
+            console.log("Year Produced:", response.data.Year);
+            console.log("IMDB Rating:", response.data.imdbRating);
+            console.log(
+              "Rotten Tomatoes Rating:",
+
+              response.data.Ratings[1].Value
+            );
+            console.log("Produced in:", response.data.Country);
+            console.log("Language:", response.data.Language);
+            console.log("Movie Plot:\n", response.data.Plot);
+            console.log("Actors/Actresses:", response.data.Actors);
             console.log("+++++++movie end+++++++");
           })
           .catch(err => {
@@ -193,9 +205,9 @@ function wildCard() {
           .then(response => {
             response.data.forEach(element => {
               console.log("*****venue data*****");
-              console.log(element.venue.name);
-              console.log(element.venue.city + " , " + element.venue.country);
-              console.log(moment(element.datetime).format("MM/DD/YYYY"));
+              console.log("Venue:", element.venue.name);
+              console.log("Location:", element.venue.city + " , " + element.venue.country);
+              console.log("Date of Show:", moment(element.datetime).format("MM/DD/YYYY"));
               console.log("*****venue end*****");
             });
           })
