@@ -11,7 +11,7 @@ var Spotify = require("node-spotify-api");
 var fs = require("fs");
 
 var liriArgs = process.argv.slice(3).join(" ");
-console.log(liriArgs);
+
 var concert = "concert-this";
 
 var song = "spotify-this-song";
@@ -46,7 +46,6 @@ function concertSearch() {
   var queryURL =
     "https://rest.bandsintown.com/artists/" + liriArgs + "/events?app_id=codingbootcamp";
 
-  console.log(queryURL);
   axios
     .get(queryURL)
     .then(response => {
@@ -69,7 +68,6 @@ function movieSearch() {
       "http://www.omdbapi.com/?t=" +
       liriArgs.split(" ").join("+") +
       "&y=&plot=short&apikey=trilogy";
-    console.log(queryURL);
 
     axios
       .get(queryURL)
