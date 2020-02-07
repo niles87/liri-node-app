@@ -8,6 +8,9 @@
 <p>App usage with command log</p>
 <img src='images/app_ex_with_log.gif'>
 
+<p>Empty arguments response</p>
+<img src='images/empty-args.gif'>
+
 <p>File tree</p>
 <img src='images/file-layout.png'>
 
