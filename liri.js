@@ -161,7 +161,7 @@ function wildCard() {
 
     switch (dataArr[0]) {
       case "spotify-this-song":
-        var spotify = new Spotify(keys.spotify);
+        var spotify = new Spotify({ id: keys.apiKeys.id, secret: keys.apiKeys.secret });
         spotify.search({ type: "track", query: dataArr[1], limit: 1 }).then(response => {
           var search = response.tracks.items[0];
           console.log("=======spotify data=======");
@@ -177,7 +177,8 @@ function wildCard() {
           .get(
             "http://www.omdbapi.com/?t=" +
               dataArr[1].split(" ").join("+") +
-              "&y=&plot=short&apikey=trilogy"
+              "&y=&plot=short&apikey=" +
+              keys.apiKeys.omdb
           )
           .then(response => {
             console.log("+++++++movie data+++++++");
@@ -202,7 +203,10 @@ function wildCard() {
       case "concert-this":
         axios
           .get(
-            "https://rest.bandsintown.com/artists/" + dataArr[1] + "/events?app_id=codingbootcamp"
+            "https://rest.bandsintown.com/artists/" +
+              dataArr[1] +
+              "/events?app_id=" +
+              keys.apiKeys.bandsInTown
           )
           .then(response => {
             response.data.forEach(element => {
