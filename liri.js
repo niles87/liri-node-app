@@ -44,7 +44,10 @@ switch (process.argv[2]) {
 
 function concertSearch() {
   var queryURL =
-    "https://rest.bandsintown.com/artists/" + liriArgs + "/events?app_id=codingbootcamp";
+    "https://rest.bandsintown.com/artists/" +
+    liriArgs +
+    "/events?app_id=" +
+    keys.apiKeys.bandsInTown;
 
   axios
     .get(queryURL)
@@ -67,7 +70,8 @@ function movieSearch() {
     var queryURL =
       "http://www.omdbapi.com/?t=" +
       liriArgs.split(" ").join("+") +
-      "&y=&plot=short&apikey=trilogy";
+      "&y=&plot=short&apikey=" +
+      keys.apiKeys.omdb;
 
     axios
       .get(queryURL)
@@ -88,7 +92,7 @@ function movieSearch() {
       });
   } else {
     axios
-      .get("http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy")
+      .get("http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=" + keys.apiKeys.omdb)
       .then(response => {
         console.log("+++++++movie data+++++++");
         console.log("Title:", response.data.Title);
@@ -112,7 +116,7 @@ function movieSearch() {
 }
 
 function songSearch() {
-  var spotify = new Spotify(keys.spotify);
+  var spotify = new Spotify({ id: keys.apiKeys.id, secret: keys.apiKeys.secret });
 
   if (liriArgs) {
     spotify
