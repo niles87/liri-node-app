@@ -1,3 +1,4 @@
+// required files and npm packages needed for app
 require("dotenv").config();
 
 var keys = require("./keys.js");
@@ -10,6 +11,7 @@ var Spotify = require("node-spotify-api");
 
 var fs = require("fs");
 
+// global variables for input parameters
 var liriArgs = process.argv.slice(3).join(" ");
 
 var concert = "concert-this";
@@ -20,6 +22,7 @@ var movie = "movie-this";
 
 var whatItSays = "do-what-it-says";
 
+// switch case statement for app logic
 switch (process.argv[2]) {
   case concert:
     logCommands();
@@ -42,6 +45,7 @@ switch (process.argv[2]) {
     break;
 }
 
+// bandsintown api call to search for shows and concerts of artists
 function concertSearch() {
   var queryURL =
     "https://rest.bandsintown.com/artists/" +
@@ -65,6 +69,7 @@ function concertSearch() {
     });
 }
 
+// OMDB api call to search for movies
 function movieSearch() {
   if (liriArgs) {
     var queryURL =
@@ -115,6 +120,7 @@ function movieSearch() {
   }
 }
 
+// Spotify API call to search for songs
 function songSearch() {
   var spotify = new Spotify({ id: keys.apiKeys.id, secret: keys.apiKeys.secret });
 
@@ -153,6 +159,7 @@ function songSearch() {
   }
 }
 
+// A searched based on what is inside the random text file
 function wildCard() {
   fs.readFile("random.txt", "utf8", (error, data) => {
     if (error) {
@@ -226,6 +233,7 @@ function wildCard() {
   });
 }
 
+// A way to track what commands and arguments are used in the app
 function logCommands() {
   var commands =
     "\n" + process.argv[2] + " , " + liriArgs + " , " + moment().format("MM/DD/YYYY, hh:mm:ss A");
