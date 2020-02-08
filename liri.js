@@ -120,15 +120,17 @@ function songSearch() {
 
   if (liriArgs) {
     spotify
-      .search({ type: "track", query: liriArgs, limit: 1 })
+      .search({ type: "track", query: liriArgs })
       .then(response => {
-        var search = response.tracks.items[0];
-        console.log("=======spotify data=======");
-        console.log("Artist:", search.album.artists[0].name);
-        console.log("Song Title:", search.name);
-        console.log("Preview:", search.preview_url);
-        console.log("Album:", search.album.name);
-        console.log("=======spotify end=======");
+        var reply = response.tracks.items;
+        reply.forEach(element => {
+          console.log("=======spotify data=======");
+          console.log("Artist:", element.album.artists[0].name);
+          console.log("Song Title:", element.name);
+          console.log("Preview:", element.preview_url);
+          console.log("Album:", element.album.name);
+          console.log("=======spotify end=======");
+        });
       })
       .catch(err => {
         console.log(err);
