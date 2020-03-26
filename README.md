@@ -3,16 +3,16 @@
 ### App Visuals
 
 <p>App usage and output</p>
-<img src='images/app_execution_no_log.gif'>
+<p align='center'><img src='images/app_execution_no_log.gif'></p>
 
 <p>App usage with command log</p>
-<img src='images/app_ex_with_log.gif'>
+<p align='center'><img src='images/app_ex_with_log.gif'></p>
 
 <p>Empty arguments response</p>
-<img src='images/empty-args.gif'>
+<p align='center'><img src='images/empty-args.gif'></p>
 
 <p>File tree</p>
-<img src='images/file-layout.png'>
+<p align='center'><img src='images/file-layout.png'></p>
 
 ## Overview
 
